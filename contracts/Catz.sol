@@ -6,6 +6,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+/**  @title Simple NFT Project
+ *   @author MaximilianFullStack
+ */
 contract Catz is ERC721, ERC721Enumerable, Ownable {
     enum MintStatus {
         CLOSED,
