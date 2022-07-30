@@ -15,9 +15,9 @@ module.exports = {
             chainId: 1337,
             blockConfirmations: 1,
         },
-        goerli: {
-            chainId: 5,
-            url: process.env.GOERLI_URL || "",
+        rinkeby: {
+            chainId: 4,
+            url: process.env.RINKEBY_URL || "",
             accounts: [process.env.PRIVATE_KEY],
             blockConfirmations: 6,
         },
