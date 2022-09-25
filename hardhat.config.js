@@ -21,6 +21,12 @@ module.exports = {
             accounts: [process.env.PRIVATE_KEY],
             blockConfirmations: 6,
         },
+        goerli: {
+            chainId: 5,
+            url: process.env.GOERLI_URL || "",
+            accounts: [process.env.PRIVATE_KEY],
+            blockConfirmations: 6,
+        },
     },
     gasReporter: {
         enabled: true,

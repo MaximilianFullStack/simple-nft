@@ -31,7 +31,9 @@
         "typechain": "^8.1.0"
     },
     "dependencies": {
+        "@apollo/client": "^3.6.9",
         "@openzeppelin/contracts": "^4.7.0",
-        "dotenv": "^16.0.1"
+        "dotenv": "^16.0.1",
+        "graphql": "^16.6.0"
     }
 }
