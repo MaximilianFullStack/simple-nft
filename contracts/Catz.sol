@@ -5,11 +5,14 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 /**  @title Simple NFT Project
  *   @author MaximilianFullStack
  */
 contract Catz is ERC721, ERC721Enumerable, Ownable {
+    using Strings for uint256;
+
     enum MintStatus {
         CLOSED,
         ALLOWLIST,
@@ -19,11 +22,11 @@ contract Catz is ERC721, ERC721Enumerable, Ownable {
 
     //constant variables
     string private constant URI =
-        "ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json";
+        "ipfs://bafybeidd4a4gbpyn7ofhkmajjr4ab2gavg4m6g5raluomrlujnm37fc24e";
 
-    uint256 public constant MAX_SUPPLY = 1000;
-    uint8 public constant MAX_MINT = 3;
-    uint256 public constant MINT_PRICE = 0.05 ether;
+    uint256 public constant MAX_SUPPLY = 100;
+    uint8 public constant MAX_MINT = 10;
+    uint256 public constant MINT_PRICE = 0.005 ether;
 
     //allow list mapping
     mapping(address => bool) public isAllowListAddress;
@@ -119,9 +122,29 @@ contract Catz is ERC721, ERC721Enumerable, Ownable {
         }
     }
 
-    function tokenURI(
-        uint256 /*tokenId*/
-    ) public view override returns (string memory) {
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        _requireMinted(tokenId);
+
+        string memory baseURI = _baseURI();
+        return
+            bytes(baseURI).length > 0
+                ? string(
+                    abi.encodePacked(
+                        baseURI,
+                        "/",
+                        (tokenId + 1).toString(),
+                        ".json"
+                    )
+                )
+                : "";
+    }
+
+    function _baseURI() internal view override returns (string memory) {
         return URI;
     }
 
